@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title id="title">NCSSM Time</title>
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+    <meta property="description" value="NCSSM Time is a web timer for how much time remains in the current NCSSM class period.">
+    <meta property="og:title" value="NCSSM Class Timer">
+    <meta property="og:description" value="A web timer for how much time remains in the current NCSSM class period.">
+
+    <style>
+         :root {
+            --usr-clr: #3080ff;
+            --usr-bg: #242424;
+        }
+        
+        h1 {
+            font-family: monospace;
+        }
+        
+        #header {
+            color: var(--usr-clr);
+            text-align: center;
+        }
+        
+        html {
+            color: var(--usr-clr);
+            background-color: var(--usr-bg);
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Main Page Text Setup -->
+    <p id="banner" style="font-family: monospace; position: absolute; top: 0.5vw; padding: 0; margin: 0; left: 35vw; width: 30vw; font-size: 3vmax; text-align: center; color: #8cb8ff;">
+        Loading...
+    </p>
+
+    <!-- Run code to determine sunrise and sunset times from API -->
+    <!-- This is for people who want to go off campus! -->
+    <p id="srss" style="font-family: monospace; position: absolute; padding: 0; margin: 0.5vmax; line-height: 0.1vw; left: 0; top: 0.5vw; width: 25vmax; font-size: 1.25vmax; text-align: left;color: #8cb8ff;">
+        SUNRISE/SUNSET INFO
+    </p>
+
+    <script src="srssapi.js"></script>
+
+    <!-- Run code to determine PFM hours & display it as text -->
+    <p id="pfm-mf" style="font-family: monospace; position: absolute; padding: 0; margin: 0.5vmax; right: 0; bottom: 0; font-size: 1vmax; text-align: center; color: #8cb8ff;"></p>
+
+    <p id="pfm-ss" style="font-family: monospace; position: absolute; padding: 0; margin: 0.5vmax; right: 0; bottom: 0; font-size: 1vmax; text-align: center;color: #8cb8ff;"></p>
+
+    <script src="pfm.js"></script>
+
+    <!-- Links to subpages -->
+    <a href="schedule" style="font-family: monospace; top: 0; right: 0; font-size: 3vmax; position: absolute; color: var(--usr-clr);">
+        Schedule
+    </a>
+
+    <a href="credits" style="font-family: monospace; top: 3vmax; right: 0; font-size: 3vmax; position: absolute; color: var(--usr-clr);">
+        Credits
+    </a>
+
+    <!-- Self promo cuz lol -->
+    <p style="left: 0; bottom: 0; position: absolute; font-family: monospace; padding: 0; margin: 0; font-size: 2.5vmax; font-weight: bold;">
+        ncssmtime.com
+    </p>
+
+    <!-- Placeholder text for when code is not working -->
+    <div id="main">
+        <p id="txt" style="margin: 0; font-family: monospace; font-weight: bold; left:0; position: absolute; top: 25vh; font-size: 8vmax; width: 100vw; text-align: center;">Loading...</p>
+    </div>
+    
+    <div id="main2">
+        <p id="txt2" style="margin: 0; font-family: monospace; left:0; position: absolute; top: 65vh; font-size: 4vmax; width: 100vw; text-align: center;"></p>
+    </div>
+    
+    <!--After everything, run script to actually determine countdown -->
+    <script src="classtime.js"></script>
+</body>
+
+</html>
