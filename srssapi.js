@@ -5,11 +5,9 @@ const locations = [
 
 const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
 
-const fetchPromises = [];
-
-locations.forEach(location => {
+const fetchPromises = locations.map(location => {
     const apiUrl = `https://api.sunrise-sunset.org/json?lat=${location.latitude}&lng=${location.longitude}&formatted=0`;
-    const fetchPromise = fetch(apiUrl)
+    return fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
             const sunriseUTC = data.results.sunrise;
@@ -17,16 +15,37 @@ locations.forEach(location => {
 
             const sunriseLocal = new Date(sunriseUTC);
             const sunsetLocal = new Date(sunsetUTC);
-            
-            const sunriseSunsetInfo = document.getElementById("srss");
-            sunriseSunsetInfo.innerHTML += `
-                <p>${location.name} Sunrise: ${sunriseLocal.toLocaleTimeString([], timeOptions)}</p>
-                <p>${location.name} Sunset : ${sunsetLocal.toLocaleTimeString([], timeOptions)}</p>
-            `;
+
+            return {
+                name: location.name,
+                sunrise: sunriseLocal.toLocaleTimeString([], timeOptions),
+                sunset: sunsetLocal.toLocaleTimeString([], timeOptions)
+            };
         })
         .catch(error => {
             console.error(`Error fetching sunrise and sunset data for ${location.name}:`, error);
+            return {
+                name: location.name,
+                sunrise: 'N/A',
+                sunset: 'N/A'
+            };
+        });
+});
+
+Promise.all(fetchPromises)
+    .then(results => {
+        results.sort((a, b) => {
+            return locations.findIndex(loc => loc.name === a.name) - locations.findIndex(loc => loc.name === b.name);
         });
 
-    fetchPromises.push(fetchPromise);
-});
+        const sunriseSunsetInfo = document.getElementById("srss");
+        results.forEach(result => {
+            sunriseSunsetInfo.innerHTML += `
+                <p>${result.name} Sunrise: ${result.sunrise}</p>
+                <p>${result.name} Sunset : ${result.sunset}</p>
+            `;
+        });
+    })
+    .catch(error => {
+        console.error("Error fetching sunrise and sunset data:", error);
+    });
