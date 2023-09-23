@@ -11,7 +11,7 @@ function updateCafeHours() {
             document.getElementById("cafe-mf").innerHTML = `DINING HALL HOURS:<br>Breakfast: 7:00 AM to 9:30 AM<br>Lunch: 11:00 AM to 1:00 PM<br>Dinner: 5:00 PM to 7:00 PM`;
     
         if (dow == "Saturday" || dow == "Sunday")
-            document.getElementById("cafe-ss").innerHTML = `DINING HALL HOURS:<br>Brunch: 10:30 AM to 1:00 PM<br>Dinner: 5:00 PM to 6:30 PM`;
+            document.getElementById("cafe-ss").innerHTML = `DINING HALL HOURS:<br>Brunch: 10:30 AM to 1:00 PM<br>Dinner: 5:00 PM to 7:00 PM`;
     }
     
     else {
