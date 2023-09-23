@@ -5,9 +5,14 @@ const locations = [
 
 const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
 
-const fetchPromises = locations.map(location => {
-    const apiUrl = `https://api.sunrise-sunset.org/json?lat=${location.latitude}&lng=${location.longitude}&formatted=0`;
-    return fetch(apiUrl)
+function fetchSunriseSunset() {
+    const morganton = document.getElementById("mor");
+
+    const selectedLocation = morganton.checked ? "MOR" : "DUR";
+    
+    const apiUrl = `https://api.sunrise-sunset.org/json?lat=${locations.find(loc => loc.name === selectedLocation).latitude}&lng=${locations.find(loc => loc.name === selectedLocation).longitude}&formatted=0`;
+
+    fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
             const sunriseUTC = data.results.sunrise;
@@ -16,36 +21,25 @@ const fetchPromises = locations.map(location => {
             const sunriseLocal = new Date(sunriseUTC);
             const sunsetLocal = new Date(sunsetUTC);
 
-            return {
-                name: location.name,
-                sunrise: sunriseLocal.toLocaleTimeString([], timeOptions),
-                sunset: sunsetLocal.toLocaleTimeString([], timeOptions)
-            };
+            const sunriseSunsetInfo = document.getElementById("srss");
+            sunriseSunsetInfo.innerHTML = `
+                <p>SUNRISE/SUNSET INFO</p>
+                <p>${selectedLocation} Sunrise: ${sunriseLocal.toLocaleTimeString([], timeOptions)}</p>
+                <p>${selectedLocation} Sunset : ${sunsetLocal.toLocaleTimeString([], timeOptions)}</p>
+            `;
         })
         .catch(error => {
-            console.error(`Error fetching sunrise and sunset data for ${location.name}:`, error);
-            return {
-                name: location.name,
-                sunrise: 'N/A',
-                sunset: 'N/A'
-            };
+            console.error(`Error fetching sunrise and sunset data for ${selectedLocation}:`, error);
         });
+}
+
+// call sunrise/sunset function during page load
+window.addEventListener('load', () => {
+    const morganton = document.getElementById("mor");
+    morganton.checked = getCheckboxStateFromCookie();
+    fetchSunriseSunset();
 });
 
-Promise.all(fetchPromises)
-    .then(results => {
-        results.sort((a, b) => {
-            return locations.findIndex(loc => loc.name === a.name) - locations.findIndex(loc => loc.name === b.name);
-        });
-
-        const sunriseSunsetInfo = document.getElementById("srss");
-        results.forEach(result => {
-            sunriseSunsetInfo.innerHTML += `
-                <p>${result.name} Sunrise: ${result.sunrise}</p>
-                <p>${result.name} Sunset : ${result.sunset}</p>
-            `;
-        });
-    })
-    .catch(error => {
-        console.error("Error fetching sunrise and sunset data:", error);
-    });
+// update when ticked
+document.getElementById("mor").addEventListener("change", fetchSunriseSunset);
+document.getElementById("sunriseSunset").addEventListener("change", fetchSunriseSunset);
