@@ -75,8 +75,14 @@ function updateSchedule() {
     document.getElementById("txt").innerText = `${timeString} left ${nextEvent.name}`; // countdown text that replaces "Loading..."
     
     if (pageTitle !== timeString) { // tab timer
-        document.title = timeString;
-        pageTitle = timeString;
+        if ((nextEvent.name.toString()).includes("Transition")) {
+            document.title = `${timeString} *TRANSITION*`;
+            pageTitle = `${timeString} *TRANSITION*`;
+        }
+        else {
+            document.title = timeString;
+            pageTitle = timeString;
+        }
     }
 }
 
