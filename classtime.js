@@ -79,6 +79,10 @@ function updateSchedule() {
             document.title = `${timeString} *TRANSITION*`;
             pageTitle = `${timeString} *TRANSITION*`;
         }
+        else if ((nextEvent.name.toString()).includes("of Check")) {
+            document.title = `${timeString} *CHECK*`;
+            pageTitle = `${timeString} *CHECK*`;
+        }
         else {
             document.title = timeString;
             pageTitle = timeString;
