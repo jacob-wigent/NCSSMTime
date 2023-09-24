@@ -1,8 +1,6 @@
 function updateCafeHours() {
-    const d = new Date();
-    let day = d.getDay();
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    dow = daysOfWeek[day];
+    let dow = daysOfWeek[(new Date()).getDay()];
     
     let morganton = document.getElementById("mor").checked;
     
