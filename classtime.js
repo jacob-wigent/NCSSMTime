@@ -69,7 +69,7 @@ function updateSchedule() {
 
         document.getElementById("txt2").innerText = `${timeString2} left of Lunch for ${eventStr.substring(3,5)} ONLY`;
     }
-    else if (eventStr.includes("before H") || eventStr.includes("of H") || eventStr.includes("Transition (H") || eventStr.includes("of I")) {
+    else if (eventStr.includes("before H") || eventStr.includes("of H") || eventStr.includes("Transition (H") || eventStr.includes("of I")) { // before check timer (completely separate)
         let hrsBeforeCheck = 0;
         let minBeforeCheck = 0;
 
