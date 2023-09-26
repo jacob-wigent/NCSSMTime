@@ -24,8 +24,8 @@ function updateSchedule() {
     let labHours = 0;
     
     let timeString2 = "";
-    
-    if ((hours * 60 + minutes) - 40 >= 0 && (nextEvent.name.toString()).substring(nextEvent.name.toString().length - 3) === "Lab" && !mod) { // if lab block comes after main block
+    let eventStr = nextEvent.name.toString();
+    if ((hours * 60 + minutes) - 40 >= 0 && eventStr.substring(eventStr.length - 3) === "Lab" && !mod) { // if lab block comes after main block
         labMinutes = minutes - 40;
         labHours = hours;
         if (labMinutes < 0 && labHours >= 1) {
@@ -35,9 +35,9 @@ function updateSchedule() {
 
         timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-        document.getElementById("txt2").innerText = `${timeString2} left of ${(nextEvent.name.toString()).substring(3,5)} ONLY`;
+        document.getElementById("txt2").innerText = `${timeString2} left of ${eventStr.substring(3,5)} ONLY`;
     }
-    else if ((nextEvent.name.toString()).includes("Lunch") && !mod) { // countdown during lunch for after lunch lab
+    else if (eventStr.includes("Lunch") && !mod) { // countdown during lunch for after lunch lab
         labMinutes = minutes + 40;
         
         if (labMinutes >= 60) {
@@ -56,7 +56,7 @@ function updateSchedule() {
         if (currentTime.getDay() === 4)
             document.getElementById("txt2").innerText = `${timeString2} left of Lunch for F4 ONLY`;
     }
-    else if ((hours * 60 + minutes) - 50 >= 0 && (nextEvent.name.toString()).substring(6, 9) === "Lab" && !mod) { // if lab block comes before main block (only after lunch)
+    else if ((hours * 60 + minutes) - 50 >= 0 && eventStr.substring(6, 9) === "Lab" && !mod) { // if lab block comes before main block (only after lunch)
         labMinutes = minutes - 50;
         labHours = hours;
         
@@ -67,7 +67,37 @@ function updateSchedule() {
 
         timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-        document.getElementById("txt2").innerText = `${timeString2} left of Lunch for ${(nextEvent.name.toString()).substring(3,5)} ONLY`;
+        document.getElementById("txt2").innerText = `${timeString2} left of Lunch for ${eventStr.substring(3,5)} ONLY`;
+    }
+    else if (eventStr.includes("before H") || eventStr.includes("of H") || eventStr.includes("Transition (H") || eventStr.includes("of I")) {
+        let hrsBeforeCheck = 0;
+        let minBeforeCheck = 0;
+
+        if (eventStr.includes("before H")) {
+            hrsBeforeCheck = hours + 3;
+            minBeforeCheck = minutes + 45;
+        }
+        else if (eventStr.includes("of H")) {
+            hrsBeforeCheck = hours + 2;
+            minBeforeCheck = minutes + 5;
+        }
+        else if (eventStr.includes("of Transition (H")) {
+            hrsBeforeCheck = hours + 1;
+            minBeforeCheck = minutes + 55;
+        }
+        else {
+            hrsBeforeCheck = hours;
+            minBeforeCheck = minutes + 15;
+        }
+
+        if (minBeforeCheck >= 60) {
+            minBeforeCheck -= 60;
+            hrsBeforeCheck += 1;
+        }
+
+        timeString2 = `${(hrsBeforeCheck === 0 ? "" : hrsBeforeCheck.toString() + ":")}${minBeforeCheck.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        document.getElementById("txt2").innerText = `${timeString2} left before Check`;
     }
     else { // turn off the text
         document.getElementById("txt2").innerText = "";
@@ -76,11 +106,11 @@ function updateSchedule() {
     document.getElementById("txt").innerText = `${timeString} left ${nextEvent.name}`; // countdown text that replaces "Loading..."
     
     if (pageTitle !== timeString) { // tab timer
-        if ((nextEvent.name.toString()).includes("Transition")) {
+        if (eventStr.includes("Transition")) {
             document.title = `${timeString} *TRANSITION*`;
             pageTitle = `${timeString} *TRANSITION*`;
         }
-        else if ((nextEvent.name.toString()).includes("of Check")) {
+        else if (eventStr.includes("of Check")) {
             document.title = `${timeString} *CHECK*`;
             pageTitle = `${timeString} *CHECK*`;
         }
