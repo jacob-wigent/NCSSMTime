@@ -1,7 +1,7 @@
 let pageTitle = "";
 let scheduleMap = new Map();
 
-let mod = false;
+let mod = true;
 setInterval(() => updateSchedule(), 200); // calls update every 200 ms
 
 function updateSchedule() {
@@ -47,13 +47,13 @@ function updateSchedule() {
 
         timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         
-        if (currentTime.getDay() === 2)
+        if (dayOfWeek(currentTime.getDay()) === "Tuesday")
             document.getElementById("txt2").innerText = `${timeString2} left of Lunch for G2 ONLY`;
 
-        if (currentTime.getDay() === 3)
+        if (dayOfWeek(currentTime.getDay()) === "Wednesday")
             document.getElementById("txt2").innerText = `${timeString2} left of Lunch for E3 ONLY`;
 
-        if (currentTime.getDay() === 4)
+        if (dayOfWeek(currentTime.getDay()) === "Thursday")
             document.getElementById("txt2").innerText = `${timeString2} left of Lunch for F4 ONLY`;
     }
     else if ((hours * 60 + minutes) - 50 >= 0 && eventStr.substring(6, 9) === "Lab" && !mod) { // if lab block comes before main block (only after lunch)
@@ -99,6 +99,9 @@ function updateSchedule() {
 
         document.getElementById("txt2").innerText = `${timeString2} left before Check`;
     }
+    else if (mod) {
+        document.getElementById("txt2").innerText = "";
+    }
     else { // turn off the text
         document.getElementById("txt2").innerText = "";
     }
@@ -133,7 +136,7 @@ function getNextEvent(dateTime) { // finds the next event
     let events;
     if (mod) { // override
         events = scheduleMap.get("Modified");
-        document.getElementById("banner").innerText = ``;
+        document.getElementById("banner").innerText = `Have a great fall break!`;
     }
     else {
         events = scheduleMap.get(day);
@@ -153,7 +156,7 @@ function updateTimeMap(currentTime) { // the actual code
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
             date: new Date(year, 9, 9, 8, 30),
-            name: "of Fall Break (before A1)"
+            name: "of Fall Break (before B3)"
         }
     ]);
     scheduleMap.set("Monday", [{
