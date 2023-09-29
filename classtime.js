@@ -127,12 +127,13 @@ function getNextEvent(dateTime) { // finds the next event
     updateTimeMap(currentTime);
 
     let day = dayOfWeek(currentTime.getDay());
-    if (document.getElementById("banner").innerText != `Today is ${day}`) // updating the day of week banner on the top of main page
+    if (document.getElementById("banner").innerText != `Today is ${day}` && !mod) // updating the day of week banner on the top of main page
         document.getElementById("banner").innerText = `Today is ${day}`;
 
     let events;
-    if (mod) {
+    if (mod) { // override
         events = scheduleMap.get("Modified");
+        document.getElementById("banner").innerText = ``;
     }
     else {
         events = scheduleMap.get(day);
@@ -151,96 +152,8 @@ function updateTimeMap(currentTime) { // the actual code
     let month = currentTime.getMonth();
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
-            date: new Date(year, month, day, 8, 0),
-            name: "before PSAT"
-        },
-        {
-            date: new Date(year, month, day, 12, 0),
-            name: "of PSAT"
-        },
-        {
-            date: new Date(year, month, day, 12, 50),
-            name: "of Lunch"
-        },
-        {
-            date: new Date(year, month, day, 13, 15),
-            name: "of A"
-        },
-        {
-            date: new Date(year, month, day, 13, 20),
-            name: "of Transition (A to B)"
-        },
-        {
-            date: new Date(year, month, day, 13, 45),
-            name: "of B"
-        },
-        {
-            date: new Date(year, month, day, 13, 50),
-            name: "of Transition (B to C)"
-        },
-        {
-            date: new Date(year, month, day, 14, 15),
-            name: "of C"
-        },
-        {
-            date: new Date(year, month, day, 14, 20),
-            name: "of Transition (C to D)"
-        },
-        {
-            date: new Date(year, month, day, 14, 45),
-            name: "of D"
-        },
-        {
-            date: new Date(year, month, day, 14, 50),
-            name: "of Transition (D to E)"
-        },
-        {
-            date: new Date(year, month, day, 15, 15),
-            name: "of E"
-        },
-        {
-            date: new Date(year, month, day, 15, 20),
-            name: "of Transition (E to F)"
-        },
-        {
-            date: new Date(year, month, day, 15, 45),
-            name: "of F"
-        },
-        {
-            date: new Date(year, month, day, 15, 50),
-            name: "of Transition (F to G)"
-        },
-        {
-            date: new Date(year, month, day, 16, 15),
-            name: "of G"
-        },
-        {
-            date: new Date(year, month, day, 18, 15),
-            name: "before H3"
-        },
-        {
-            date: new Date(year, month, day, 19, 55),
-            name: "of H3"
-        },
-        {
-            date: new Date(year, month, day, 20, 5),
-            name: "of Transition (H3 to I3)"
-        },
-        {
-            date: new Date(year, month, day, 21, 45),
-            name: "of I3"
-        },
-        {
-            date: new Date(year, month, day, 22, 0),
-            name: "before Check"
-        },
-        {
-            date: new Date(year, month, day, 22, 5),
-            name: "of Check"
-        },
-        {
-            date: new Date(year, month, day + 1, 8, 30),
-            name: "before C4"
+            date: new Date(year, 9, 9, 8, 30),
+            name: "of Fall Break (before A1)"
         }
     ]);
     scheduleMap.set("Monday", [{
