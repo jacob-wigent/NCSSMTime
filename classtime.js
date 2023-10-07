@@ -156,7 +156,7 @@ function updateTimeMap(currentTime) { // the actual code
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
             date: new Date(year, 9, 9, 8, 30),
-            name: "of Fall Break (before B3)"
+            name: "before B3"
         }
     ]);
     scheduleMap.set("Monday", [{
