@@ -155,6 +155,14 @@ function updateTimeMap(currentTime) { // the actual code
     let month = currentTime.getMonth();
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
+            date: new Date(year, 9, 8, 22, 0),
+            name: "before Check"
+        },
+        {
+            date: new Date(year, 9, 8, 22, 5),
+            name: "of Check"
+        },
+        {
             date: new Date(year, 9, 9, 8, 30),
             name: "before B3"
         }
