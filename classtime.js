@@ -5,8 +5,14 @@ let mod = true;
 setInterval(() => updateSchedule(), 200); // calls update every 200 ms
 
 function updateSchedule() {
-    // getting the date and calculating the time difference
+    // getting the date
     let currentTime = new Date();
+
+    // force refresh at 12:00:00 AM in case of special updates
+    if (currentTime.getHours() === 0 && currentTime.getMinutes() === 0 && currentTime.getSeconds() === 0 && currentTime.getMilliseconds() <= 400)
+        location.reload();
+
+    // calculating time difference
     let nextEvent = getNextEvent(currentTime);
     let timeDifference = nextEvent.date - currentTime;
     timeDifference = Math.floor(timeDifference / 1000);
@@ -16,7 +22,7 @@ function updateSchedule() {
     timeDifference = Math.floor(timeDifference / 60);
     let hours = timeDifference;
 
-    // forming the actual countdown string
+    // formatting the actual countdown string
     let timeString = `${(hours === 0 ? "" : hours.toString() + ":")}${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
     // fancy subtext below the main one for lab blocks if people don't have a lab but do have the main block (example A2 but NOT A2 Lab)
