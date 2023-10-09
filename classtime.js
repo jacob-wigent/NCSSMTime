@@ -2,6 +2,15 @@ let pageTitle = "";
 let scheduleMap = new Map();
 
 let mod = true;
+/*
+PROCEDURE
+On modified schedules, change mod to true above
+Add modified schedule to "Modified" schedule map
+Update banner text
+Update lunch txt2 for respective period (delete if needed)
+Hope that lab blocks are still 40 minutes longer??? (they are not, in fact) *FIX THIS*
+*/
+
 setInterval(() => updateSchedule(), 200); // calls update every 200 ms
 
 function updateSchedule() {
@@ -31,7 +40,7 @@ function updateSchedule() {
     
     let timeString2 = "";
     let eventStr = nextEvent.name.toString();
-    if ((hours * 60 + minutes) - 40 >= 0 && eventStr.substring(eventStr.length - 3) === "Lab" && !mod) { // if lab block comes after main block
+    if ((hours * 60 + minutes) >= 40 && eventStr.substring(eventStr.length - 3) === "Lab") { // if lab block comes after main block
         labMinutes = minutes - 40;
         labHours = hours;
         if (labMinutes < 0 && labHours >= 1) {
@@ -62,7 +71,19 @@ function updateSchedule() {
         if (dayOfWeek(currentTime.getDay()) === "Thursday")
             document.getElementById("txt2").innerText = `${timeString2} left of Lunch for F4 ONLY`;
     }
-    else if ((hours * 60 + minutes) - 50 >= 0 && eventStr.substring(6, 9) === "Lab" && !mod) { // if lab block comes before main block (only after lunch)
+    else if (eventStr.includes("Lunch") && mod) { // modified lab timer for lunch
+        labMinutes = minutes + 40;
+        
+        if (labMinutes >= 60) {
+            labMinutes -= 60;
+            labHours += 1;
+        }
+
+        timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        document.getElementById("txt2").innerText = `${timeString2} left of Lunch for E3 ONLY`; // MODIFY BASED ON DAY OF WEEK, delete if needed
+    }
+    else if ((hours * 60 + minutes) >= 50 && eventStr.substring(6, 9) === "Lab") { // if lab block comes before main block (only after lunch)
         labMinutes = minutes - 50;
         labHours = hours;
         
@@ -105,9 +126,6 @@ function updateSchedule() {
 
         document.getElementById("txt2").innerText = `${timeString2} left before Check`;
     }
-    else if (mod) {
-        document.getElementById("txt2").innerText = "";
-    }
     else { // turn off the text
         document.getElementById("txt2").innerText = "";
     }
@@ -142,7 +160,7 @@ function getNextEvent(dateTime) { // finds the next event
     let events;
     if (mod) { // override
         events = scheduleMap.get("Modified");
-        document.getElementById("banner").innerText = `Have a great fall break!`;
+        document.getElementById("banner").innerText = `Today is Monday on Wednesday schedule`;
     }
     else {
         events = scheduleMap.get(day);
@@ -161,18 +179,82 @@ function updateTimeMap(currentTime) { // the actual code
     let month = currentTime.getMonth();
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
-            date: new Date(year, 9, 8, 22, 0),
-            name: "before Check"
-        },
-        {
-            date: new Date(year, 9, 8, 22, 5),
-            name: "of Check"
-        },
-        {
-            date: new Date(year, 9, 9, 8, 30),
-            name: "before B3"
-        }
-    ]);
+        date: new Date(year, month, day, 8, 30),
+        name: "before B3"
+    },
+    {
+        date: new Date(year, month, day, 9, 20),
+        name: "of B3"
+    },
+    {
+        date: new Date(year, month, day, 9, 25),
+        name: "of Transition (B3 to D3)"
+    },
+    {
+        date: new Date(year, month, day, 10, 15),
+        name: "of D3"
+    },
+    {
+        date: new Date(year, month, day, 10, 20),
+        name: "of Transition (D3 to C3)"
+    },
+    {
+        date: new Date(year, month, day, 11, 50),
+        name: "of C3 AND C3 Lab"
+    },
+    {
+        date: new Date(year, month, day, 12, 40),
+        name: "of Lunch"
+    },
+    {
+        date: new Date(year, month, day, 14, 10),
+        name: "of E3 Lab AND E3"
+    },
+    {
+        date: new Date(year, month, day, 14, 15),
+        name: "of Transition (E3 to F3)"
+    },
+    {
+        date: new Date(year, month, day, 15, 5),
+        name: "of F3"
+    },
+    {
+        date: new Date(year, month, day, 15, 10),
+        name: "of Transition (F3 to G3)"
+    },
+    {
+        date: new Date(year, month, day, 16, 0),
+        name: "of G3"
+    },
+    {
+        date: new Date(year, month, day, 18, 15),
+        name: "before H1"
+    },
+    {
+        date: new Date(year, month, day, 19, 55),
+        name: "of H1"
+    },
+    {
+        date: new Date(year, month, day, 20, 5),
+        name: "of Transition (H1 to I1)"
+    },
+    {
+        date: new Date(year, month, day, 21, 45),
+        name: "of I1"
+    },
+    {
+        date: new Date(year, month, day, 22, 0),
+        name: "before Check"
+    },
+    {
+        date: new Date(year, month, day, 22, 5),
+        name: "of Check"
+    },
+    {
+        date: new Date(year, month, day + 1, 8, 30),
+        name: "before D2"
+    }
+]);
     scheduleMap.set("Monday", [{
             date: new Date(year, month, day, 8, 30),
             name: "before A1"
