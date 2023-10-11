@@ -1,7 +1,7 @@
 let pageTitle = "";
 let scheduleMap = new Map();
 
-let mod = false;
+let mod = true;
 /*
 PROCEDURE
 On modified schedules, change mod to true above
@@ -81,7 +81,7 @@ function updateSchedule() {
 
         timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-        document.getElementById("txt2").innerText = `${timeString2} left of Lunch for E3 ONLY`; // MODIFY BASED ON DAY OF WEEK, delete if needed
+        document.getElementById("txt2").innerText = ``; // MODIFY BASED ON DAY OF WEEK, delete if needed
     }
     else if ((hours * 60 + minutes) >= 50 && eventStr.substring(6, 9) === "Lab") { // if lab block comes before main block (only after lunch)
         labMinutes = minutes - 50;
@@ -160,7 +160,7 @@ function getNextEvent(dateTime) { // finds the next event
     let events;
     if (mod) { // override
         events = scheduleMap.get("Modified");
-        document.getElementById("banner").innerText = `Today is Monday on Wednesday schedule`;
+        document.getElementById("banner").innerText = `Today is Wednesday (PSAT Schedule)`;
     }
     else {
         events = scheduleMap.get(day);
@@ -179,82 +179,98 @@ function updateTimeMap(currentTime) { // the actual code
     let month = currentTime.getMonth();
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
-        date: new Date(year, month, day, 8, 30),
-        name: "before B3"
-    },
-    {
-        date: new Date(year, month, day, 9, 20),
-        name: "of B3"
-    },
-    {
-        date: new Date(year, month, day, 9, 25),
-        name: "of Transition (B3 to D3)"
-    },
-    {
-        date: new Date(year, month, day, 10, 15),
-        name: "of D3"
-    },
-    {
-        date: new Date(year, month, day, 10, 20),
-        name: "of Transition (D3 to C3)"
-    },
-    {
-        date: new Date(year, month, day, 11, 50),
-        name: "of C3 AND C3 Lab"
-    },
-    {
-        date: new Date(year, month, day, 12, 40),
-        name: "of Lunch"
-    },
-    {
-        date: new Date(year, month, day, 14, 10),
-        name: "of E3 Lab AND E3"
-    },
-    {
-        date: new Date(year, month, day, 14, 15),
-        name: "of Transition (E3 to F3)"
-    },
-    {
-        date: new Date(year, month, day, 15, 5),
-        name: "of F3"
-    },
-    {
-        date: new Date(year, month, day, 15, 10),
-        name: "of Transition (F3 to G3)"
-    },
-    {
-        date: new Date(year, month, day, 16, 0),
-        name: "of G3"
-    },
-    {
-        date: new Date(year, month, day, 18, 15),
-        name: "before H1"
-    },
-    {
-        date: new Date(year, month, day, 19, 55),
-        name: "of H1"
-    },
-    {
-        date: new Date(year, month, day, 20, 5),
-        name: "of Transition (H1 to I1)"
-    },
-    {
-        date: new Date(year, month, day, 21, 45),
-        name: "of I1"
-    },
-    {
-        date: new Date(year, month, day, 22, 0),
-        name: "before Check"
-    },
-    {
-        date: new Date(year, month, day, 22, 5),
-        name: "of Check"
-    },
-    {
-        date: new Date(year, month, day + 1, 8, 30),
-        name: "before D2"
-    }
-]);
+            date: new Date(year, month, day, 8, 0),
+            name: "before PSAT"
+        },
+        {
+            date: new Date(year, month, day, 12, 0),
+            name: "of PSAT"
+        },
+        {
+            date: new Date(year, month, day, 12, 50),
+            name: "of Lunch"
+        },
+        {
+            date: new Date(year, month, day, 13, 15),
+            name: "of A"
+        },
+        {
+            date: new Date(year, month, day, 13, 20),
+            name: "of Transition (A to B)"
+        },
+        {
+            date: new Date(year, month, day, 13, 45),
+            name: "of B"
+        },
+        {
+            date: new Date(year, month, day, 13, 50),
+            name: "of Transition (B to C)"
+        },
+        {
+            date: new Date(year, month, day, 14, 15),
+            name: "of C"
+        },
+        {
+            date: new Date(year, month, day, 14, 20),
+            name: "of Transition (C to D)"
+        },
+        {
+            date: new Date(year, month, day, 14, 45),
+            name: "of D"
+        },
+        {
+            date: new Date(year, month, day, 14, 50),
+            name: "of Transition (D to E)"
+        },
+        {
+            date: new Date(year, month, day, 15, 15),
+            name: "of E"
+        },
+        {
+            date: new Date(year, month, day, 15, 20),
+            name: "of Transition (E to F)"
+        },
+        {
+            date: new Date(year, month, day, 15, 45),
+            name: "of F"
+        },
+        {
+            date: new Date(year, month, day, 15, 50),
+            name: "of Transition (F to G)"
+        },
+        {
+            date: new Date(year, month, day, 16, 15),
+            name: "of G"
+        },
+        {
+            date: new Date(year, month, day, 18, 15),
+            name: "before H3"
+        },
+        {
+            date: new Date(year, month, day, 19, 55),
+            name: "of H3"
+        },
+        {
+            date: new Date(year, month, day, 20, 5),
+            name: "of Transition (H3 to I3)"
+        },
+        {
+            date: new Date(year, month, day, 21, 45),
+            name: "of I3"
+        },
+        {
+            date: new Date(year, month, day, 22, 0),
+            name: "before Check"
+        },
+        {
+            date: new Date(year, month, day, 22, 5),
+            name: "of Check"
+        },
+        {
+            date: new Date(year, month, day + 1, 8, 0),
+            name: "before PSAT"
+        }
+    ]);
     scheduleMap.set("Monday", [{
             date: new Date(year, month, day, 8, 30),
             name: "before A1"
