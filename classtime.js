@@ -1,14 +1,14 @@
 let pageTitle = "";
 let scheduleMap = new Map();
 
-let mod = false;
+let mod = true;
 /*
 PROCEDURE
 On modified schedules, change mod to true above
 Add modified schedule to "Modified" schedule map
 Update banner text
+Update lab and reg block lengths
 Update lunch txt2 for respective period (delete if needed)
-Hope that lab blocks are still 40 minutes longer??? (they are not, in fact) *FIX THIS*
 */
 
 setInterval(() => updateSchedule(), 200); // calls update every 200 ms
@@ -37,11 +37,19 @@ function updateSchedule() {
     // fancy subtext below the main one for lab blocks if people don't have a lab but do have the main block (example A2 but NOT A2 Lab)
     let labMinutes = 0;
     let labHours = 0;
+
+    let regBlock = 50;
+    let labBlock = 90;
+
+    if (mod) { // MODIFY if needed
+        regBlock = 50;
+        labBlock = 90;
+    }
     
     let timeString2 = "";
     let eventStr = nextEvent.name.toString();
-    if ((hours * 60 + minutes) >= 40 && eventStr.substring(eventStr.length - 3) === "Lab") { // if lab block comes after main block
-        labMinutes = minutes - 40;
+    if ((hours * 60 + minutes) >= (labBlock - regBlock) && eventStr.substring(eventStr.length - 3) === "Lab") { // if lab block comes after main block
+        labMinutes = minutes - (labBlock - regBlock);
         labHours = hours;
         if (labMinutes < 0 && labHours >= 1) {
             labMinutes += 60;
@@ -53,7 +61,7 @@ function updateSchedule() {
         document.getElementById("txt2").innerText = `${timeString2} left of ${eventStr.substring(3,5)} ONLY`;
     }
     else if (eventStr.includes("Lunch") && !mod) { // countdown during lunch for after lunch lab
-        labMinutes = minutes + 40;
+        labMinutes = minutes + (labBlock - regBlock);
         
         if (labMinutes >= 60) {
             labMinutes -= 60;
@@ -72,7 +80,7 @@ function updateSchedule() {
             document.getElementById("txt2").innerText = `${timeString2} left of Lunch for F4 ONLY`;
     }
     else if (eventStr.includes("Lunch") && mod) { // modified lab timer for lunch
-        labMinutes = minutes + 40;
+        labMinutes = minutes + (labBlock - regBlock);
         
         if (labMinutes >= 60) {
             labMinutes -= 60;
@@ -83,8 +91,8 @@ function updateSchedule() {
 
         document.getElementById("txt2").innerText = ``; // MODIFY BASED ON DAY OF WEEK, delete if needed
     }
-    else if ((hours * 60 + minutes) >= 50 && eventStr.substring(6, 9) === "Lab") { // if lab block comes before main block (only after lunch)
-        labMinutes = minutes - 50;
+    else if ((hours * 60 + minutes) >= regBlock && eventStr.substring(6, 9) === "Lab") { // if lab block comes before main block (only after lunch)
+        labMinutes = minutes - regBlock;
         labHours = hours;
         
         if (labMinutes < 0 && labHours >= 1) {
@@ -160,7 +168,7 @@ function getNextEvent(dateTime) { // finds the next event
     let events;
     if (mod) { // override
         events = scheduleMap.get("Modified");
-        document.getElementById("banner").innerText = `Today is ${day}`; // MODIFY, delete if needed
+        document.getElementById("banner").innerText = `Have a great Extended!`; // MODIFY, delete if needed
     }
     else {
         events = scheduleMap.get(day);
@@ -179,8 +187,12 @@ function updateTimeMap(currentTime) { // the actual code
     let month = currentTime.getMonth();
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
-            date: new Date(year, month, day, 8, 30),
-            name: "before ..."
+            date: new Date(year, 9, 30, 22, 0),
+            name: "before Check"
+        },
+        {
+            date: new Date(year, 9, 31, 8, 30),
+            name: "before D2"
         }
     ]);
     scheduleMap.set("Monday", [{
