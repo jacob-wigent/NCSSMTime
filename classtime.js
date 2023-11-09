@@ -58,7 +58,7 @@ function updateSchedule() {
 
         timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-        document.getElementById("txt2").innerText = `${timeString2} left of ${eventStr.substring(3,5)} ONLY`;
+        document.getElementById("txt2").innerText = `${timeString2} left of ${eventStr.substring(3,5)} only`;
     }
     else if (eventStr.includes("Lunch") && !mod) { // countdown during lunch for after lunch lab
         labMinutes = minutes + (labBlock - regBlock);
@@ -71,13 +71,13 @@ function updateSchedule() {
         timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         
         if (dayOfWeek(currentTime.getDay()) === "Tuesday")
-            document.getElementById("txt2").innerText = `${timeString2} left of Lunch for G2 ONLY`;
+            document.getElementById("txt2").innerText = `${timeString2} left of Lunch for G2 only`;
 
         if (dayOfWeek(currentTime.getDay()) === "Wednesday")
-            document.getElementById("txt2").innerText = `${timeString2} left of Lunch for E3 ONLY`;
+            document.getElementById("txt2").innerText = `${timeString2} left of Lunch for E3 only`;
 
         if (dayOfWeek(currentTime.getDay()) === "Thursday")
-            document.getElementById("txt2").innerText = `${timeString2} left of Lunch for F4 ONLY`;
+            document.getElementById("txt2").innerText = `${timeString2} left of Lunch for F4 only`;
     }
     else if (eventStr.includes("Lunch") && mod) { // modified lab timer for lunch
         labMinutes = minutes + (labBlock - regBlock);
@@ -102,7 +102,7 @@ function updateSchedule() {
 
         timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-        document.getElementById("txt2").innerText = `${timeString2} left of Lunch for ${eventStr.substring(3,5)} ONLY`;
+        document.getElementById("txt2").innerText = `${timeString2} left of Lunch for ${eventStr.substring(3,5)} only`;
     }
     else if (eventStr.includes("before H") || eventStr.includes("of H") || eventStr.includes("Transition (H") || eventStr.includes("of I")) { // before check timer (completely separate)
         let hrsBeforeCheck = 0;
@@ -189,86 +189,6 @@ function updateTimeMap(currentTime) { // the actual code
     scheduleMap.set("Modified", [{
             date: new Date(year, month, day, 8, 30),
             name: "before B3"
-        },
-        {
-            date: new Date(year, month, day, 9, 0),
-            name: "of B3"
-        },
-        {
-            date: new Date(year, month, day, 9, 5),
-            name: "of Transition (B3 to D3)"
-        },
-        {
-            date: new Date(year, month, day, 9, 35),
-            name: "of D3"
-        },
-        {
-            date: new Date(year, month, day, 9, 40),
-            name: "of Transition (D3 to AMC-12)"
-        },
-        {
-            date: new Date(year, month, day, 11, 10),
-            name: "of AMC-12A"
-        },
-        {
-            date: new Date(year, month, day, 11, 15),
-            name: "of Transition (AMC-12 to C3)"
-        },
-        {
-            date: new Date(year, month, day, 12, 45),
-            name: "of C3 AND C3 Lab"
-        },
-        {
-            date: new Date(year, month, day, 13, 35),
-            name: "of Lunch"
-        },
-        {
-            date: new Date(year, month, day, 15, 5),
-            name: "of E3 Lab AND E3"
-        },
-        {
-            date: new Date(year, month, day, 15, 10),
-            name: "of Transition (E3 to F3)"
-        },
-        {
-            date: new Date(year, month, day, 15, 40),
-            name: "of F3"
-        },
-        {
-            date: new Date(year, month, day, 15, 45),
-            name: "of Transition (F3 to G3)"
-        },
-        {
-            date: new Date(year, month, day, 16, 15),
-            name: "of G3"
-        },
-        {
-            date: new Date(year, month, day, 18, 15),
-            name: "before H3"
-        },
-        {
-            date: new Date(year, month, day, 19, 55),
-            name: "of H3"
-        },
-        {
-            date: new Date(year, month, day, 20, 5),
-            name: "of Transition (H3 to I3)"
-        },
-        {
-            date: new Date(year, month, day, 21, 45),
-            name: "of I3"
-        },
-        {
-            date: new Date(year, month, day, 22, 0),
-            name: "before Check"
-        },
-        {
-            date: new Date(year, month, day, 22, 5),
-            name: "of Check"
-        },
-        {
-            date: new Date(year, month, day + 1, 8, 30),
-            name: "before C4"
         }
     ]);
     scheduleMap.set("Monday", [{
@@ -382,11 +302,11 @@ function updateTimeMap(currentTime) { // the actual code
         },
         {
             date: new Date(year, month, day, 10, 20),
-            name: "of Transition (E2 to A2)"
+            name: "of Transition (E2 to A2L)"
         },
         {
             date: new Date(year, month, day, 11, 50),
-            name: "of A2 AND A2 Lab"
+            name: "of A2 and A2 Lab"
         },
         {
             date: new Date(year, month, day, 12, 40),
@@ -394,11 +314,11 @@ function updateTimeMap(currentTime) { // the actual code
         },
         {
             date: new Date(year, month, day, 14, 10),
-            name: "of G2 Lab AND G2"
+            name: "of G2 Lab and G2"
         },
         {
             date: new Date(year, month, day, 14, 15),
-            name: "of Transition (G2 to F2)"
+            name: "of Transition (G2L to F2)"
         },
         {
             date: new Date(year, month, day, 15, 5),
@@ -455,11 +375,11 @@ function updateTimeMap(currentTime) { // the actual code
         },
         {
             date: new Date(year, month, day, 10, 20),
-            name: "of Transition (D3 to C3)"
+            name: "of Transition (D3 to C3L)"
         },
         {
             date: new Date(year, month, day, 11, 50),
-            name: "of C3 AND C3 Lab"
+            name: "of C3 and C3 Lab"
         },
         {
             date: new Date(year, month, day, 12, 40),
@@ -467,11 +387,11 @@ function updateTimeMap(currentTime) { // the actual code
         },
         {
             date: new Date(year, month, day, 14, 10),
-            name: "of E3 Lab AND E3"
+            name: "of E3 Lab and E3"
         },
         {
             date: new Date(year, month, day, 14, 15),
-            name: "of Transition (E3 to F3)"
+            name: "of Transition (E3L to F3)"
         },
         {
             date: new Date(year, month, day, 15, 5),
@@ -532,11 +452,11 @@ function updateTimeMap(currentTime) { // the actual code
         },
         {
             date: new Date(year, month, day, 10, 20),
-            name: "of Transition (A4 to B4)"
+            name: "of Transition (A4 to B4L)"
         },
         {
             date: new Date(year, month, day, 11, 50),
-            name: "of B4 AND B4 Lab"
+            name: "of B4 and B4 Lab"
         },
         {
             date: new Date(year, month, day, 12, 40),
@@ -544,11 +464,11 @@ function updateTimeMap(currentTime) { // the actual code
         },
         {
             date: new Date(year, month, day, 14, 10),
-            name: "of F4 Lab AND F4"
+            name: "of F4 Lab and F4"
         },
         {
             date: new Date(year, month, day, 14, 15),
-            name: "of Transition (F4 to G4)"
+            name: "of Transition (F4L to G4)"
         },
         {
             date: new Date(year, month, day, 15, 5),
@@ -605,11 +525,11 @@ function updateTimeMap(currentTime) { // the actual code
         },
         {
             date: new Date(year, month, day, 10, 20),
-            name: "of Transition (C5 to D5)"
+            name: "of Transition (C5 to D5L)"
         },
         {
             date: new Date(year, month, day, 11, 50),
-            name: "of D5 AND D5 Lab"
+            name: "of D5 and D5 Lab"
         },
         {
             date: new Date(year, month, day, 12, 40),
@@ -621,11 +541,11 @@ function updateTimeMap(currentTime) { // the actual code
         },
         {
             date: new Date(year, month, day, 13, 35),
-            name: "of Transition (B5 to E5)"
+            name: "of Transition (B5 to E5L)"
         },
         {
             date: new Date(year, month, day, 15, 5),
-            name: "of E5 AND E5 Lab"
+            name: "of E5 and E5 Lab"
         },
         {
             date: new Date(year, month, day, 16, 0),
