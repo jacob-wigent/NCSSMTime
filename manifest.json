@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "NCSSM Time",
+    "version": "2.0.0",
+    "description": "NCSSM Time is a web timer for how much time remains in the current NCSSM class period, and until important events such as Check.",
+    "author": "Brandon Yang and Jacob Wigent",
+    "chrome_url_overrides" : {
+      "newtab": "index.html"
+    },
+    "icons": {
+      "16": "assets/favicon.png",
+      "128": "assets/favicon.png"
+    }
+  }

@@ -43,6 +43,7 @@ div.campus-switch {
 div.campus-switch p {
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
+    font-size: 16px;
 }
 
 /* The switch - the box around the slider */

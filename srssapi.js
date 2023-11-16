@@ -44,7 +44,6 @@ window.addEventListener('load', () => {
 
 // update when ticked
 document.getElementById("mor").addEventListener("change", fetchSunriseSunset);
-document.getElementById("sunriseSunset").addEventListener("change", fetchSunriseSunset);
 
 function convertTimeToPercentage(timeString) {
     // Parse the input time string

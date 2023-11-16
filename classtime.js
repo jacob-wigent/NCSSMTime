@@ -142,16 +142,16 @@ function updateSchedule() {
     
     if (pageTitle !== timeString) { // tab timer
         if (eventStr.includes("Transition")) {
-            document.title = `Transition: ${timeString}`;
-            pageTitle = `Transition: ${timeString}`;
+            document.title = `New Tab - Transition: ${timeString}`;
+            pageTitle = `New Tab - Transition: ${timeString}`;
         }
         else if (eventStr.includes("of Check")) {
-            document.title = `Check: ${timeString}`;
-            pageTitle = `Check: ${timeString}`;
+            document.title = `New Tab - Check: ${timeString}`;
+            pageTitle = `New Tab - Check: ${timeString}`;
         }
         else {
-            document.title = timeString;
-            pageTitle = timeString;
+            document.title = `New Tab - ${timeString}`;
+            pageTitle = `New Tab - ${timeString}`;
         }
     }
 }
