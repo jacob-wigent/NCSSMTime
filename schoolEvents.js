@@ -12,61 +12,50 @@ function updateSchoolHours() {
     const checkText = document.getElementById("check").children[1];
     const dot = document.getElementById("dot");
 
-    if (morganton) {
-        if (dow != "Saturday" && dow != "Sunday") {
-            breakfastText.parentElement.children[0].innerText = "Breakfast";
-            lunchText.parentElement.children[0].innerText = "Lunch";
-            breakfastText.innerHTML = "7:30 AM<br>9:30 AM";
-            lunchText.innerHTML = "11:00 AM<br>1:00 PM";
-            dinnerText.innerHTML = "5:00 PM<br>7:00 PM";
+    if (dow != "Saturday" && dow != "Sunday" && dow != "Friday") {
+        breakfastText.parentElement.children[0].innerText = "Breakfast";
+        lunchText.parentElement.children[0].innerText = "Lunch";
+        breakfastText.innerHTML = "7:30 AM<br>9:00 AM";
+        lunchText.innerHTML = "11:30 AM<br>12:30 PM";
+        dinnerText.innerHTML = "5:00 PM<br>6:00 PM";
 
-            breakfastText.parentElement.style.top = convertTimeToPercentage("8:00 AM");
-            lunchText.parentElement.style.top = convertTimeToPercentage("12:00 PM");
-            dinnerText.parentElement.style.top = convertTimeToPercentage("6:00 PM");
-        }
-
-        if (dow == "Saturday" || dow == "Sunday") {
-            breakfastText.parentElement.children[0].innerText = "Brunch";
-            lunchText.parentElement.children[0].innerText = "";
-            breakfastText.innerHTML = "10:30 AM<br>1:00 PM";
-            lunchText.innerHTML = "";
-            dinnerText.innerHTML = "5:00 PM<br>7:00 PM";
-
-            breakfastText.parentElement.style.top = convertTimeToPercentage("11:00 AM");
-            dinnerText.parentElement.style.top = convertTimeToPercentage("6:00 PM");
-        }
-    } else {
-        if (dow != "Saturday" && dow != "Sunday") {
-            breakfastText.parentElement.children[0].innerText = "Breakfast";
-            lunchText.parentElement.children[0].innerText = "Lunch";
-            breakfastText.innerHTML = "7:45 AM<br>10:00 AM";
-            lunchText.innerHTML = "11:30 AM<br>1:30 PM";
-            dinnerText.innerHTML = "5:00 PM<br>7:30 PM";
-
-            breakfastText.parentElement.style.top = convertTimeToPercentage("9:00 AM");
-            lunchText.parentElement.style.top = convertTimeToPercentage("12:30 PM");
-            dinnerText.parentElement.style.top = convertTimeToPercentage("6:45 PM");
-        }
-
-        if (dow == "Saturday" || dow == "Sunday") {
-            breakfastText.parentElement.children[0].innerText = "Brunch";
-            lunchText.parentElement.children[0].innerText = "";
-            breakfastText.innerHTML = "10:30 AM<br>1:00 PM";
-            lunchText.innerHTML = "";
-            dinnerText.innerHTML = "5:00 PM<br>6:30 PM";
-
-            breakfastText.parentElement.style.top = convertTimeToPercentage("11:00 AM");
-            dinnerText.parentElement.style.top = convertTimeToPercentage("5:45 PM");
-        }
+        breakfastText.parentElement.style.top = convertTimeToPercentage("8:00 AM");
+        lunchText.parentElement.style.top = convertTimeToPercentage("12:00 PM");
+        dinnerText.parentElement.style.top = convertTimeToPercentage("5:30 PM");
     }
 
-    if (dow != "Friday" && dow != "Saturday") {
-        checkText.innerHTML = "10:00 PM";
-        checkText.parentElement.style.top = convertTimeToPercentage("10:00 PM");
-    } else {
-        checkText.innerHTML = "11:00 PM";
-        checkText.parentElement.style.top = convertTimeToPercentage("11:00 PM");
+    if (dow == "Friday") {
+        breakfastText.parentElement.children[0].innerText = "Breakfast";
+        lunchText.parentElement.children[0].innerText = "Lunch";
+        dinnerText.parentElement.children[0].innerText = "";
+        breakfastText.innerHTML = "8:00 AM<br>9:00 AM";
+        lunchText.innerHTML = "11:30 AM<br>12:30 PM";
+        dinnerText.innerHTML = "";
+
+        breakfastText.parentElement.style.top = convertTimeToPercentage("8:30 AM");
+        lunchText.parentElement.style.top = convertTimeToPercentage("12:00 PM");
     }
+
+    if (dow == "Saturday") {
+        breakfastText.parentElement.children[0].innerText = "";
+        lunchText.parentElement.children[0].innerText = "";
+        dinnerText.parentElement.children[0].innerText = "";
+        breakfastText.innerHTML = "";
+        lunchText.innerHTML = "";
+        dinnerText.innerHTML = "";
+    }
+
+    if (dow == "Sunday") {
+        breakfastText.parentElement.children[0].innerText = "";
+        lunchText.parentElement.children[0].innerText = "";
+        breakfastText.innerHTML = "";
+        lunchText.innerHTML = "";
+        dinnerText.innerHTML = "5:00 PM<br>6:00 PM";
+        dinnerText.parentElement.style.top = convertTimeToPercentage("5:30 PM");
+    }
+
+    checkText.innerHTML = "10:00 PM";
+    checkText.parentElement.style.top = convertTimeToPercentage("11:00 PM");
 
     dot.style.top = convertTimeToPercentage(getCurrentTime());
 }
