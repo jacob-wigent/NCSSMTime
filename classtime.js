@@ -166,7 +166,7 @@ function updateSchedule() {
         document.getElementById("txt2").innerHTML = `${timeString2}<br><span class="sub-text">Left before Check</span>`;
     }
     else { // turn off the text
-        document.getElementById("txt2").innerHTML = `<span class="sub-text"></span>`;
+        document.getElementById("txt2").innerHTML = `<span class="sub-text">SRIP Check: 10:00 PM Daily</span>`;
     }
 
     document.getElementById("txt").innerHTML = `${timeString}<br><span class="sub-text">Left ${nextEvent.name}</span>`; // countdown text that replaces "Loading..."
