@@ -15,7 +15,7 @@ function updateSchoolHours() {
     if (dow != "Saturday" && dow != "Sunday" && dow != "Friday") {
         breakfastText.parentElement.children[0].innerText = "Breakfast";
         lunchText.parentElement.children[0].innerText = "Lunch";
-        breakfastText.innerHTML = "7:30 AM<br>9:00 AM";
+        breakfastText.innerHTML = "7:30 AM<br>8:30 AM";
         lunchText.innerHTML = "11:30 AM<br>12:30 PM";
         dinnerText.innerHTML = "5:00 PM<br>6:00 PM";
 
@@ -28,11 +28,11 @@ function updateSchoolHours() {
         breakfastText.parentElement.children[0].innerText = "Breakfast";
         lunchText.parentElement.children[0].innerText = "Lunch";
         dinnerText.parentElement.children[0].innerText = "";
-        breakfastText.innerHTML = "8:00 AM<br>9:00 AM";
+        breakfastText.innerHTML = "7:30 AM<br>8:30 AM";
         lunchText.innerHTML = "11:30 AM<br>12:30 PM";
         dinnerText.innerHTML = "";
 
-        breakfastText.parentElement.style.top = convertTimeToPercentage("8:30 AM");
+        breakfastText.parentElement.style.top = convertTimeToPercentage("8:00 AM");
         lunchText.parentElement.style.top = convertTimeToPercentage("12:00 PM");
     }
 
