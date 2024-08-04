@@ -166,7 +166,7 @@ function updateSchedule() {
         document.getElementById("txt2").innerHTML = `${timeString2}<br><span class="sub-text">Left before Check</span>`;
     }
     else { // turn off the text
-        document.getElementById("txt2").innerHTML = `<span class="sub-text"></span>`;
+        document.getElementById("txt2").innerHTML = `<span class="sub-text">Check your Orientation Schedule!</span>`;
     }
 
     document.getElementById("txt").innerHTML = `${timeString}<br><span class="sub-text">Left ${nextEvent.name}</span>`; // countdown text that replaces "Loading..."
@@ -219,7 +219,7 @@ function getNextEvent(dateTime) { // finds the next event
     let events;
     if (mod) { // override
         events = scheduleMap.get("Modified");
-        document.getElementById("banner").innerText = `Have a great Summer Break!`
+        document.getElementById("banner").innerText = day + ` (Orientation)`
     }
     else {
         events = scheduleMap.get(day);
