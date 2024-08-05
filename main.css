@@ -141,7 +141,7 @@ main {
   margin: 0;
 }
 
-.main-times h1 { /* The main timer */
+.main-times h2 { /* The main timer */
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
   font-size: 112px;
@@ -150,7 +150,7 @@ main {
   margin-top: -16px;
 }
 
-.main-times h1 span.sub-text { /* Text below the main timer */
+.main-times h2 span.sub-text { /* Text below the main timer */
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 48px;
@@ -158,7 +158,7 @@ main {
   margin-top: -12px;
 }
 
-.main-times h2 { /* Secondary timer */
+.main-times h3 { /* Secondary timer */
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 54px;
@@ -167,7 +167,7 @@ main {
   margin-top: 46px;
 }
 
-.main-times h2 span.sub-text { /* Text below the secondary timer */
+.main-times h3 span.sub-text { /* Text below the secondary timer */
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 28px;
