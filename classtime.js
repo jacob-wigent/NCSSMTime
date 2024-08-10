@@ -2,7 +2,7 @@ let pageTitle = "";
 let scheduleMap = new Map();
 
 let mod = true;
-let showTimeline = false;
+let showTimeline = true;
 /*
 If you are reading this, why hello there! 
 I am writing this because I have to remind myself what to do every time there's a modified schedule
