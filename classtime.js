@@ -292,6 +292,78 @@ function updateTimeMap(currentTime) { // the actual code
     {
         date: new Date(year, month, 14, 8, 30),
         name: "before B3"
+    },
+    {
+        date: new Date(year, month, 14, 9, 20),
+        name: "of B3"
+    },
+    {
+        date: new Date(year, month, 14, 9, 25),
+        name: "of Transition (B3 to D3)"
+    },
+    {
+        date: new Date(year, month, 14, 10, 15),
+        name: "of D3"
+    },
+    {
+        date: new Date(year, month, 14, 10, 20),
+        name: "of Transition (D3 to C3L)"
+    },
+    {
+        date: new Date(year, month, 14, 11, 50),
+        name: "of C3 and C3 Lab"
+    },
+    {
+        date: new Date(year, month, 14, 12, 40),
+        name: "of Lunch"
+    },
+    {
+        date: new Date(year, month, 14, 14, 10),
+        name: "of E3 Lab and E3"
+    },
+    {
+        date: new Date(year, month, 14, 14, 15),
+        name: "of Transition (E3L to F3)"
+    },
+    {
+        date: new Date(year, month, 14, 15, 5),
+        name: "of F3"
+    },
+    {
+        date: new Date(year, month, 14, 15, 10),
+        name: "of Transition (F3 to G3)"
+    },
+    {
+        date: new Date(year, month, 14, 16, 30),
+        name: "of G3 (Lockdown Drill)"
+    },
+    {
+        date: new Date(year, month, 14, 18, 15),
+        name: "before H3"
+    },
+    {
+        date: new Date(year, month, 14, 19, 55),
+        name: "of H3"
+    },
+    {
+        date: new Date(year, month, 14, 20, 5),
+        name: "of Transition (H3 to I3)"
+    },
+    {
+        date: new Date(year, month, 14, 21, 45),
+        name: "of I3"
+    },
+    {
+        date: new Date(year, month, 14, 22, 0),
+        name: "before Check"
+    },
+    {
+        date: new Date(year, month, 14, 22, 5),
+        name: "of Check"
+    },
+    {
+        date: new Date(year, month, 15, 8, 30),
+        name: "before C4"
     }
     ]);
     scheduleMap.set("Monday", [{
