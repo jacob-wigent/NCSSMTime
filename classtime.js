@@ -166,7 +166,7 @@ function updateSchedule() {
         document.getElementById("txt2").innerHTML = `${timeString2}<br><span class="sub-text">Left before Check</span>`;
     }
     else { // turn off the text
-        document.getElementById("txt2").innerHTML = `<span class="sub-text">Check your Orientation Schedule!</span>`;
+        document.getElementById("txt2").innerHTML = `<span class="sub-text"></span>`;
     }
 
     document.getElementById("txt").innerHTML = `${timeString}<br><span class="sub-text">Left ${nextEvent.name}</span>`; // countdown text that replaces "Loading..."
@@ -219,7 +219,7 @@ function getNextEvent(dateTime) { // finds the next event
     let events;
     if (mod) { // override
         events = scheduleMap.get("Modified");
-        document.getElementById("banner").innerText = day + ` (Orientation)`
+        document.getElementById("banner").innerText = day + ` (FDOC)`;
     }
     else {
         events = scheduleMap.get(day);
@@ -238,40 +238,60 @@ function updateTimeMap(currentTime) { // the actual code
     let month = currentTime.getMonth();
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
-        date: new Date(year, 7, 4, 13, 0),
-        name: "before RLA Move-In"
-    },
-    {
-        date: new Date(year, 7, 4, 16, 0),
-        name: "of RLA Move-In"
-    },
-    {
-        date: new Date(year, 7, 7, 10, 30),
-        name: "before SL Move-In"
-    },
-    {
-        date: new Date(year, 7, 7, 12, 0),
-        name: "of SL Move-In"
-    },
-    {
-        date: new Date(year, 7, 9, 9, 0),
-        name: "before Jr. Move-In"
-    },
-    {
-        date: new Date(year, 7, 9, 15, 0),
-        name: "of Jr. Move-In"
-    },
-    {
-        date: new Date(year, 7, 11, 13, 30),
-        name: "before Sr. Move-In"
-    },
-    {
-        date: new Date(year, 7, 11, 16, 30),
-        name: "of Sr. Move-In"
-    },
-    {
-        date: new Date(year, 7, 13, 8, 30),
+        date: new Date(year, month, 13, 8, 30),
         name: "before D2"
+    },
+    {
+        date: new Date(year, month, 13, 9, 20),
+        name: "of D2"
+    },
+    {
+        date: new Date(year, month, 13, 9, 25),
+        name: "of Transition (D2 to E2)"
+    },
+    {
+        date: new Date(year, month, 13, 10, 15),
+        name: "of E2"
+    },
+    {
+        date: new Date(year, month, 13, 10, 20),
+        name: "of Transition (E2 to A2L)"
+    },
+    {
+        date: new Date(year, month, 13, 11, 50),
+        name: "of A2 and A2 Lab"
+    },
+    {
+        date: new Date(year, month, 13, 12, 40),
+        name: "of Lunch"
+    },
+    {
+        date: new Date(year, month, 13, 14, 10),
+        name: "of G2 Lab and G2"
+    },
+    {
+        date: new Date(year, month, 13, 14, 15),
+        name: "of Transition (G2L to F2)"
+    },
+    {
+        date: new Date(year, month, 13, 15, 5),
+        name: "of F2"
+    },
+    {
+        date: new Date(year, month, 13, 17, 0),
+        name: "of Convocation"
+    },
+    {
+        date: new Date(year, month, 13, 22, 0),
+        name: "before Check"
+    },
+    {
+        date: new Date(year, month, 13, 22, 5),
+        name: "of Check"
+    },
+    {
+        date: new Date(year, month, 14, 8, 30),
+        name: "before B3"
     }
     ]);
     scheduleMap.set("Monday", [{
