@@ -1,7 +1,7 @@
 let pageTitle = "";
 let scheduleMap = new Map();
 
-let mod = true;
+let mod = false;
 let showTimeline = true;
 /*
 If you are reading this, why hello there! 
@@ -240,130 +240,6 @@ function updateTimeMap(currentTime) { // the actual code
     scheduleMap.set("Modified", [{
         date: new Date(year, month, 13, 8, 30),
         name: "before D2"
-    },
-    {
-        date: new Date(year, month, 13, 9, 20),
-        name: "of D2"
-    },
-    {
-        date: new Date(year, month, 13, 9, 25),
-        name: "of Transition (D2 to E2)"
-    },
-    {
-        date: new Date(year, month, 13, 10, 15),
-        name: "of E2"
-    },
-    {
-        date: new Date(year, month, 13, 10, 20),
-        name: "of Transition (E2 to A2L)"
-    },
-    {
-        date: new Date(year, month, 13, 11, 50),
-        name: "of A2 and A2 Lab"
-    },
-    {
-        date: new Date(year, month, 13, 12, 40),
-        name: "of Lunch"
-    },
-    {
-        date: new Date(year, month, 13, 14, 10),
-        name: "of G2 Lab and G2"
-    },
-    {
-        date: new Date(year, month, 13, 14, 15),
-        name: "of Transition (G2L to F2)"
-    },
-    {
-        date: new Date(year, month, 13, 15, 5),
-        name: "of F2"
-    },
-    {
-        date: new Date(year, month, 13, 17, 0),
-        name: "of Convocation"
-    },
-    {
-        date: new Date(year, month, 13, 22, 0),
-        name: "before Check"
-    },
-    {
-        date: new Date(year, month, 13, 22, 5),
-        name: "of Check"
-    },
-    {
-        date: new Date(year, month, 14, 8, 30),
-        name: "before B3"
-    },
-    {
-        date: new Date(year, month, 14, 9, 20),
-        name: "of B3"
-    },
-    {
-        date: new Date(year, month, 14, 9, 25),
-        name: "of Transition (B3 to D3)"
-    },
-    {
-        date: new Date(year, month, 14, 10, 15),
-        name: "of D3"
-    },
-    {
-        date: new Date(year, month, 14, 10, 20),
-        name: "of Transition (D3 to C3L)"
-    },
-    {
-        date: new Date(year, month, 14, 11, 50),
-        name: "of C3 and C3 Lab"
-    },
-    {
-        date: new Date(year, month, 14, 12, 40),
-        name: "of Lunch"
-    },
-    {
-        date: new Date(year, month, 14, 14, 10),
-        name: "of E3 Lab and E3"
-    },
-    {
-        date: new Date(year, month, 14, 14, 15),
-        name: "of Transition (E3L to F3)"
-    },
-    {
-        date: new Date(year, month, 14, 15, 5),
-        name: "of F3"
-    },
-    {
-        date: new Date(year, month, 14, 15, 10),
-        name: "of Transition (F3 to G3)"
-    },
-    {
-        date: new Date(year, month, 14, 16, 30),
-        name: "of G3 (Lockdown Drill)"
-    },
-    {
-        date: new Date(year, month, 14, 18, 15),
-        name: "before H3"
-    },
-    {
-        date: new Date(year, month, 14, 19, 55),
-        name: "of H3"
-    },
-    {
-        date: new Date(year, month, 14, 20, 5),
-        name: "of Transition (H3 to I3)"
-    },
-    {
-        date: new Date(year, month, 14, 21, 45),
-        name: "of I3"
-    },
-    {
-        date: new Date(year, month, 14, 22, 0),
-        name: "before Check"
-    },
-    {
-        date: new Date(year, month, 14, 22, 5),
-        name: "of Check"
-    },
-    {
-        date: new Date(year, month, 15, 8, 30),
-        name: "before C4"
     }
     ]);
     scheduleMap.set("Monday", [{
