@@ -1,8 +1,8 @@
 let pageTitle = "";
 let scheduleMap = new Map();
 
-let mod = false;
-let showTimeline = true;
+let mod = true;
+let showTimeline = false;
 /*
 If you are reading this, why hello there! 
 I am writing this because I have to remind myself what to do every time there's a modified schedule
@@ -219,7 +219,7 @@ function getNextEvent(dateTime) { // finds the next event
     let events;
     if (mod) { // override
         events = scheduleMap.get("Modified");
-        document.getElementById("banner").innerText = `Have a great Extended Weekend!`;
+        document.getElementById("banner").innerText = `Have a great Fall Break!`;
     }
     else {
         events = scheduleMap.get(day);
@@ -238,16 +238,16 @@ function updateTimeMap(currentTime) { // the actual code
     let month = currentTime.getMonth();
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
-        date: new Date(year, 8, 2, 22, 0),
+        date: new Date(year, 9, 6, 22, 0),
         name: "before Check"
     },
     {
-        date: new Date(year, 8, 2, 22, 5),
+        date: new Date(year, 9, 6, 22, 5),
         name: "of Check"
     },
     {
-        date: new Date(year, 8, 3, 8, 30),
-        name: "before D2"
+        date: new Date(year, 9, 7, 8, 30),
+        name: "before A5"
     }
     ]);
     scheduleMap.set("Monday", [{
