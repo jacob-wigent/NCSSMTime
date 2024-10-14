@@ -1,7 +1,7 @@
 let pageTitle = "";
 let scheduleMap = new Map();
 
-let mod = false;
+let mod = true;
 let showTimeline = true;
 /*
 If you are reading this, why hello there! 
@@ -219,7 +219,7 @@ function getNextEvent(dateTime) { // finds the next event
     let events;
     if (mod) { // override
         events = scheduleMap.get("Modified");
-        document.getElementById("banner").innerText = day + ` (Friday Schedule)`;
+        document.getElementById("banner").innerText = day + ` (Wednesday Schedule)`;
     }
     else {
         events = scheduleMap.get(day);
@@ -238,79 +238,79 @@ function updateTimeMap(currentTime) { // the actual code
     let month = currentTime.getMonth();
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
-        date: new Date(year, 9, 6, 22, 0),
-        name: "before Check"
+        date: new Date(year, 9, 14, 8, 30),
+        name: "before B3"
     },
     {
-        date: new Date(year, 9, 6, 22, 5),
-        name: "of Check"
+        date: new Date(year, 9, 14, 9, 20),
+        name: "of B3"
     },
     {
-        date: new Date(year, 9, 7, 8, 30),
-        name: "before A5"
+        date: new Date(year, 9, 14, 9, 25),
+        name: "of Transition (B3 to D3)"
     },
     {
-        date: new Date(year, 9, 7, 9, 20),
-        name: "of A5"
+        date: new Date(year, 9, 14, 10, 15),
+        name: "of D3"
     },
     {
-        date: new Date(year, 9, 7, 9, 25),
-        name: "of Transition (A5 to C5)"
+        date: new Date(year, 9, 14, 10, 20),
+        name: "of Transition (D3 to C3L)"
     },
     {
-        date: new Date(year, 9, 7, 10, 15),
-        name: "of C5"
+        date: new Date(year, 9, 14, 11, 50),
+        name: "of C3 and C3 Lab"
     },
     {
-        date: new Date(year, 9, 7, 10, 20),
-        name: "of Transition (C5 to D5L)"
-    },
-    {
-        date: new Date(year, 9, 7, 11, 50),
-        name: "of D5 and D5 Lab"
-    },
-    {
-        date: new Date(year, 9, 7, 12, 40),
+        date: new Date(year, 9, 14, 12, 40),
         name: "of Lunch"
     },
     {
-        date: new Date(year, 9, 7, 13, 30),
-        name: "of B5"
+        date: new Date(year, 9, 14, 14, 10),
+        name: "of E3 Lab and E3"
     },
     {
-        date: new Date(year, 9, 7, 13, 35),
-        name: "of Transition (B5 to E5L)"
+        date: new Date(year, 9, 14, 14, 15),
+        name: "of Transition (E3L to F3)"
     },
     {
-        date: new Date(year, 9, 7, 15, 5),
-        name: "of E5 and E5 Lab"
+        date: new Date(year, 9, 14, 15, 5),
+        name: "of F3"
     },
     {
-        date: new Date(year, 9, 7, 18, 15),
+        date: new Date(year, 9, 14, 15, 10),
+        name: "of Transition (F3 to G3)"
+    },
+    {
+        date: new Date(year, 9, 14, 16, 0),
+        name: "of G3"
+    },
+    {
+        date: new Date(year, 9, 14, 18, 15),
         name: "before H1"
     },
     {
-        date: new Date(year, 9, 7, 19, 55),
+        date: new Date(year, 9, 14, 19, 55),
         name: "of H1"
     },
     {
-        date: new Date(year, 9, 7, 20, 5),
+        date: new Date(year, 9, 14, 20, 5),
         name: "of Transition (H1 to I1)"
     },
     {
-        date: new Date(year, 9, 7, 21, 45),
+        date: new Date(year, 9, 14, 21, 45),
         name: "of I1"
     },
     {
-        date: new Date(year, 9, 7, 22, 0),
+        date: new Date(year, 9, 14, 22, 0),
         name: "before Check"
     },
     {
-        date: new Date(year, 9, 7, 22, 5),
+        date: new Date(year, 9, 14, 22, 5),
         name: "of Check"
     },
     {
-        date: new Date(year, 9, 8, 8, 30),
+        date: new Date(year, 9, 15, 8, 30),
         name: "before D2"
     }
     ]);
