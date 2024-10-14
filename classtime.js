@@ -1,7 +1,7 @@
 let pageTitle = "";
 let scheduleMap = new Map();
 
-let mod = true;
+let mod = false;
 let showTimeline = true;
 /*
 If you are reading this, why hello there! 
