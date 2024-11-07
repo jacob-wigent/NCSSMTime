@@ -3,6 +3,9 @@ let scheduleMap = new Map();
 
 let mod = false;
 let showTimeline = true;
+
+let specialSubTimer = true;
+
 /*
 If you are reading this, why hello there! 
 I am writing this because I have to remind myself what to do every time there's a modified schedule
@@ -12,6 +15,8 @@ Add modified schedule to "Modified" schedule map
 Update banner text
 Update lab and reg block lengths
 Update lunch txt2 for respective period (delete if needed)
+
+Special subtext countdown? Change specialSubTimer above to true and change the countdown date below
 */
 
 if (!showTimeline) {
@@ -26,6 +31,7 @@ setInterval(() => updateSchedule(), 200); // calls update every 200 ms
 function updateSchedule() {
     // getting the date
     let currentTime = new Date();
+    // enter custom dates here in the format currentTime = new Date("2024-11-07T16:00:00Z");
 
     let currentDay = dayOfWeek(currentTime.getDay());
     let currentHour = currentTime.getHours();
@@ -40,7 +46,7 @@ function updateSchedule() {
     // calculating time difference
     let nextEvent = getNextEvent(currentTime);
     let timeDifference = nextEvent.date - currentTime;
-    timeDifference = Math.floor(timeDifference / 1000);
+    timeDifference = Math.floor(timeDifference / 1000); // total seconds until next event
     let seconds = timeDifference % 60;
     timeDifference = Math.floor(timeDifference / 60);
     let minutes = timeDifference % 60;
@@ -70,13 +76,28 @@ function updateSchedule() {
     let labBlock = 90;
 
     if (mod) { // MODIFY if needed
-        regBlock = 30;
+        regBlock = 50;
         labBlock = 90;
     }
     
     let timeString2 = "";
     let eventStr = nextEvent.name.toString();
-    if ((hours * 60 + minutes) >= (labBlock - regBlock) && eventStr.substring(eventStr.length - 3) === "Lab") { // if lab block comes after main block
+
+    let specialEvent = new Date("2024-11-08T01:00:00Z");
+    let specTimeDifference = specialEvent - currentTime;
+    if (specialSubTimer && specTimeDifference >= 0) {
+        specTimeDifference = Math.floor(specTimeDifference / 1000); // total seconds until special event
+        let specSeconds = specTimeDifference % 60;
+        specTimeDifference = Math.floor(specTimeDifference / 60);
+        let specMinutes = specTimeDifference % 60;
+        specTimeDifference = Math.floor(specTimeDifference / 60);
+        let specHours = specTimeDifference;
+
+        let specTimeString = `${(specHours === 0 ? "" : specHours.toString() + ":")}${specMinutes.toString().padStart(2, '0')}:${specSeconds.toString().padStart(2, '0')}`;
+
+        document.getElementById("txt2").innerHTML = `${specTimeString}<br><span class="sub-text">Left before Regeneron STS is Due</span>`
+    }
+    else if ((hours * 60 + minutes) >= (labBlock - regBlock) && eventStr.substring(eventStr.length - 3) === "Lab") { // if lab block comes after main block
         labMinutes = minutes - (labBlock - regBlock);
         labHours = hours;
         if (labMinutes < 0 && labHours >= 1) {
@@ -135,6 +156,7 @@ function updateSchedule() {
 
         document.getElementById("txt2").innerHTML = `${timeString2}<br><span class="sub-text">Left of Lunch for ${eventStr.substring(3,5)} only</span>`;
     }
+
     else if (eventStr.includes("before H") || eventStr.includes("of H") || eventStr.includes("Transition (H") || eventStr.includes("of I")) { // before check timer (completely separate)
         let hrsBeforeCheck = 0;
         let minBeforeCheck = 0;
@@ -185,26 +207,6 @@ function updateSchedule() {
             pageTitle = timeString;
         }
     }
-    
-    // Play sound when timer hits 00:00 IF slider is ticked
-    let enableSound = document.getElementById('enable-sound').checked;
-    if (enableSound) {
-        if ((hours === 0 && minutes === 0 && seconds === 0 && currentTime.getMilliseconds() < 200) && ((currentHour >= 8 && currentHour <= 16) || (currentHour >= 22))) { // when main timer hits 00:00 between 8 AM and 4 PM, or after 10 PM
-            document.getElementById('end').play();
-        }
-        else if ((hours === 0 && minutes === 2 && seconds === 0 && currentTime.getMilliseconds() < 200) && (currentHour >= 8 && currentHour <= 16) && ((document.getElementById("txt").innerHTML).includes("Transition") || (document.getElementById("txt").innerHTML).includes("of Lunch"))) { // 2 minutes warning: transitions between 8 AM and 5 PM and lunch
-            document.getElementById('midpoint').play();
-        }
-        else if (currentHour === 8 && currentMinute === 28 && currentSecond === 0 && currentTime.getMilliseconds() < 200) { // 8:28 warning
-            document.getElementById('midpoint').play();
-        }
-        else if ((document.getElementById("txt2").innerHTML).includes("00:00") && currentTime.getMilliseconds() < 200) { // lab block start/end short beep
-            document.getElementById('midpoint').play();
-        }
-        else if ((hours === 0 && minutes === 2 && seconds === 0 && currentTime.getMilliseconds() < 200) && ((document.getElementById("txt").innerHTML).includes("before Check") || (document.getElementById("txt").innerHTML).includes("of Check"))) { // 2 minutes warning: 9:58 or 10:58 for before check, and 10:03 or 11:03 for check
-            document.getElementById('midpoint').play();
-        }
-    }
 }
 
 function getNextEvent(dateTime) { // finds the next event
@@ -240,86 +242,6 @@ function updateTimeMap(currentTime) { // the actual code
     scheduleMap.set("Modified", [{
         date: new Date(year, 10, 6, 8, 30),
         name: "before B3"
-    },
-    {
-        date: new Date(year, 10, 6, 9, 0),
-        name: "of B3"
-    },
-    {
-        date: new Date(year, 10, 6, 9, 5),
-        name: "of Transition (B3 to D3)"
-    },
-    {
-        date: new Date(year, 10, 6, 9, 35),
-        name: "of D3"
-    },
-    {
-        date: new Date(year, 10, 6, 9, 40),
-        name: "of Transition (D3 to AMC 12)"
-    },
-    {
-        date: new Date(year, 10, 6, 11, 10),
-        name: "of AMC 12"
-    },
-    {
-        date: new Date(year, 10, 6, 11, 15),
-        name: "of Transition (AMC 12 to C3L)"
-    },
-    {
-        date: new Date(year, 10, 6, 12, 45),
-        name: "of C3 and C3 Lab"
-    },
-    {
-        date: new Date(year, 10, 6, 13, 35),
-        name: "of Lunch"
-    },
-    {
-        date: new Date(year, 10, 6, 15, 5),
-        name: "of E3 Lab and E3"
-    },
-    {
-        date: new Date(year, 10, 6, 15, 10),
-        name: "of Transition (E3L to F3)"
-    },
-    {
-        date: new Date(year, 10, 6, 15, 40),
-        name: "of F3"
-    },
-    {
-        date: new Date(year, 10, 6, 15, 45),
-        name: "of Transition (F3 to G3)"
-    },
-    {
-        date: new Date(year, 10, 6, 16, 15),
-        name: "of G3"
-    },
-    {
-        date: new Date(year, 10, 6, 18, 15),
-        name: "before H3"
-    },
-    {
-        date: new Date(year, 10, 6, 19, 55),
-        name: "of H3"
-    },
-    {
-        date: new Date(year, 10, 6, 20, 5),
-        name: "of Transition (H3 to I3)"
-    },
-    {
-        date: new Date(year, 10, 6, 21, 45),
-        name: "of I3"
-    },
-    {
-        date: new Date(year, 10, 6, 22, 0),
-        name: "before Check"
-    },
-    {
-        date: new Date(year, 10, 6, 22, 5),
-        name: "of Check"
-    },
-    {
-        date: new Date(year, 10, 7, 8, 30),
-        name: "before C4"
     }
     ]);
     scheduleMap.set("Monday", [{
