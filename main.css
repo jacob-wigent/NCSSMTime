@@ -2,7 +2,7 @@
   --light: #fff;
   --dark: #000;
 }
-/* */
+
 * {
 box-sizing: border-box;
 margin: 0;
@@ -32,18 +32,18 @@ body.morganton
   background-position: center;
   }
 
-div.campus-switch, div.sound-control {
+div.campus-switch, div.time-format {
   display: flex;
   gap: 16px;
   align-items: center;
 }
 
-div.campus-switch p, div.sound-control p {
+div.campus-switch p, div.time-format p {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
 }
 
-div.sound-control {
+div.time-format {
   position: absolute;
   top: 15vh;
 }
