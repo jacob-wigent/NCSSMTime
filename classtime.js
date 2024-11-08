@@ -60,10 +60,20 @@ function updateSchedule() {
     }
 
     // formatting the actual countdown string
+    let disableSeconds = document.getElementById('enable-short').checked;
+
     let timeString;
     if (days > 0) {
         timeString = `${days}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    } 
+    }
+    else if (disableSeconds && (getNextEvent(currentTime)).date - currentTime >= 300000) {
+        if (hours > 0) {
+            timeString = `${hours.toString() + ":"}${minutes.toString().padStart(2, '0')}`;
+        }
+        else {
+            timeString = `${"0:"}${minutes.toString().padStart(2, '0')}`;
+        }
+    }
     else {
         timeString = `${(hours === 0 ? "" : hours.toString() + ":")}${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
@@ -105,7 +115,18 @@ function updateSchedule() {
             labHours -= 1;
         }
 
-        timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (disableSeconds && (labHours * 60 + labMinutes >= 5)) {
+            if (labHours > 0) {
+                timeString2 = `${labHours.toString() + ":"}${labMinutes.toString().padStart(2, '0')}}`;
+            }
+            else {
+                timeString2 = `${"0:"}${labMinutes.toString().padStart(2, '0')}`;
+            }
+        }
+
+        else {
+            timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
 
         document.getElementById("txt2").innerHTML = `${timeString2}<br><span class="sub-text">Left of ${eventStr.substring(3,5)} only</span>`;
     }
@@ -117,7 +138,18 @@ function updateSchedule() {
             labHours += 1;
         }
 
-        timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (disableSeconds && (labHours * 60 + labMinutes >= 5)) {
+            if (labHours > 0) {
+                timeString2 = `${labHours.toString() + ":"}${labMinutes.toString().padStart(2, '0')}}`;
+            }
+            else {
+                timeString2 = `${"0:"}${labMinutes.toString().padStart(2, '0')}`;
+            }
+        }
+        
+        else {
+            timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
         
         if (currentDay === "Tuesday")
             document.getElementById("txt2").innerHTML = `${timeString2}<br><span class="sub-text">Left of Lunch for G2 only</span>`;
@@ -131,7 +163,7 @@ function updateSchedule() {
         else
             document.getElementById("txt2").innerHTML = ``;
     }
-    else if (eventStr.includes("of Lunch") && mod) { // modified lab timer for lunch
+    /*else if (eventStr.includes("of Lunch") && mod) { // modified lab timer for lunch
         labMinutes = minutes + (labBlock - regBlock);
         
         if (labMinutes >= 60) {
@@ -142,7 +174,7 @@ function updateSchedule() {
         timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
         document.getElementById("txt2").innerHTML = ``; // MODIFY BASED ON DAY OF WEEK, delete if needed
-    }
+    }*/
     else if ((hours * 60 + minutes) >= regBlock && eventStr.substring(6, 9) === "Lab") { // if lab block comes before main block (only after lunch)
         labMinutes = minutes - regBlock;
         labHours = hours;
@@ -152,7 +184,18 @@ function updateSchedule() {
             labHours -= 1;
         }
 
-        timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (disableSeconds && (labHours * 60 + labMinutes >= 5)) {
+            if (labHours > 0) {
+                timeString2 = `${labHours.toString() + ":"}${labMinutes.toString().padStart(2, '0')}}`;
+            }
+            else {
+                timeString2 = `${"0:"}${labMinutes.toString().padStart(2, '0')}`;
+            }
+        }
+        
+        else {
+            timeString2 = `${(labHours === 0 ? "" : labHours.toString() + ":")}${labMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
 
         document.getElementById("txt2").innerHTML = `${timeString2}<br><span class="sub-text">Left of Lunch for ${eventStr.substring(3,5)} only</span>`;
     }
@@ -183,7 +226,18 @@ function updateSchedule() {
             hrsBeforeCheck += 1;
         }
 
-        timeString2 = `${(hrsBeforeCheck === 0 ? "" : hrsBeforeCheck.toString() + ":")}${minBeforeCheck.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (disableSeconds && (hrsBeforeCheck * 60 + minBeforeCheck >= 5)) {
+            if (hrsBeforeCheck > 0) {
+                timeString2 = `${hrsBeforeCheck.toString() + ":"}${minBeforeCheck.toString().padStart(2, '0')}`;
+            }
+            else {
+                timeString2 = `${"0:"}${minBeforeCheck.toString().padStart(2, '0')}`;
+            }
+        }
+        
+        else {
+            timeString2 = `${(hrsBeforeCheck === 0 ? "" : hrsBeforeCheck.toString() + ":")}${minBeforeCheck.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
 
         document.getElementById("txt2").innerHTML = `${timeString2}<br><span class="sub-text">Left before Check</span>`;
     }
