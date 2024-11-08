@@ -4,7 +4,7 @@ let scheduleMap = new Map();
 let mod = false;
 let showTimeline = true;
 
-let specialSubTimer = true;
+let specialSubTimer = false;
 
 /*
 If you are reading this, why hello there! 
