@@ -31,10 +31,10 @@ function addCheckboxEventListeners(checkboxId, cookieName) {
 // Initialize checkbox states and add event listeners on page load
 window.addEventListener('load', () => {
     initializeCheckboxState("mor", "morCheckboxState");
-    initializeCheckboxState("enable-sound", "enableSoundState");
+    initializeCheckboxState("enable-short", "enableShortState");
 
     addCheckboxEventListeners("mor", "morCheckboxState");
-    addCheckboxEventListeners("enable-sound", "enableSoundState");
+    addCheckboxEventListeners("enable-short", "enableShortState");
 
     // Apply background based on the "mor" checkbox state
     const isMorganton = getCheckboxStateFromCookie("morCheckboxState");
