@@ -1,8 +1,8 @@
 let pageTitle = "";
 let scheduleMap = new Map();
 
-let mod = false;
-let showTimeline = true;
+let mod = true;
+let showTimeline = false;
 
 let specialSubTimer = false;
 
@@ -275,7 +275,7 @@ function getNextEvent(dateTime) { // finds the next event
     let events;
     if (mod) { // override
         events = scheduleMap.get("Modified");
-        document.getElementById("banner").innerText = day + ` (AMC 12)`;
+        document.getElementById("banner").innerText = `Have a great Thanksgiving Break!`;
     }
     else {
         events = scheduleMap.get(day);
@@ -294,8 +294,8 @@ function updateTimeMap(currentTime) { // the actual code
     let month = currentTime.getMonth();
     let day = currentTime.getDate();
     scheduleMap.set("Modified", [{
-        date: new Date(year, 10, 6, 8, 30),
-        name: "before B3"
+        date: new Date(year, 11, 1, 22, 0),
+        name: "before Check"
     }
     ]);
     scheduleMap.set("Monday", [{
